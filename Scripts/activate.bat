@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=D:\LCIT_Project\lcit_customs_interchange\web_service\LCIT_CUSTOMS_SERVICE
+set VIRTUAL_ENV=D:\LCIT_Project\LCIT_CUSTOMS_SERVICE
 
 if not defined PROMPT set PROMPT=$P$G
 

@@ -33,7 +33,7 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV "D:\LCIT_Project\lcit_customs_interchange\web_service\LCIT_CUSTOMS_SERVICE"
+set -gx VIRTUAL_ENV "D:\LCIT_Project\LCIT_CUSTOMS_SERVICE"
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/Scripts" $PATH
