@@ -1,5 +1,7 @@
 from ldap3 import Server, Connection, ALL,SUBTREE,NTLM
+from Connection.CustomDBConnector import Connect_To_Customs_SQLSRV,close_connection
 class UserController :
+
     def login(USER_DATA):
         # Active Directory server IP and credentials
         server_ip = "172.19.240.37"
@@ -43,3 +45,33 @@ class UserController :
         conn.unbind()
 
         return resultAuth
+    
+    def FetchCustomsUser(USER_DATA):
+
+        conn = Connect_To_Customs_SQLSRV()
+        if conn:
+            try:
+                cursor = conn.cursor()
+
+                query = (
+                    f"SELECT * FROM TB_AD_USERS WHERE UName = ?"
+                )
+                cursor.execute(query,USER_DATA.AD_USERNAME)
+
+                columns = [column[0] for column in cursor.description]
+                rows = cursor.fetchall()
+
+                if not rows:
+                    return {"status": 404, "message": "Data not found"}
+
+                result_json = [dict(zip(columns, row)) for row in rows]
+
+            except Exception as e:
+                return {"status": 500, "message": f"Error: {e}"}
+            finally:
+                if cursor:
+                    cursor.close()
+                if conn:
+                    conn.close()            
+                    
+        return {"status": 200, "data": result_json}

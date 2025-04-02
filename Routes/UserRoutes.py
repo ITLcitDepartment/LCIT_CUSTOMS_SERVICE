@@ -6,7 +6,7 @@ router = APIRouter(
     tags=["USER-Routes"]
 )
 
-@router.post("/AuthUser")
+@router.post("/AuthUserAD")
 def AuthUser(USER_DATA: UserModel):
     AuthResponse = UserController.login(USER_DATA)
     if AuthResponse['Result']['Status'] == 'OK':
@@ -15,3 +15,15 @@ def AuthUser(USER_DATA: UserModel):
         raise HTTPException(status_code=404, detail="Data not found")
     else: 
         raise HTTPException(status_code=400, detail="Bad request")
+    
+@router.post("/FetchCustomsUser")
+def AuthUser(USER_DATA: UserModel):
+    FetchResponse = UserController.FetchCustomsUser(USER_DATA)
+    if FetchResponse['status'] == 200:
+        return FetchResponse['data']
+    elif FetchResponse['status'] == 404:
+        raise HTTPException(status_code=404, detail="Data not found")
+    elif FetchResponse['status'] == 500:
+        raise HTTPException(status_code=500, detail=FetchResponse['message'])
+    else: 
+        raise HTTPException(status_code=400, detail="Bad request")   

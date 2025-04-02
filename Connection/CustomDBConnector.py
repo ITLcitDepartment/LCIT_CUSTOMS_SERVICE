@@ -1,10 +1,10 @@
 import pyodbc
 
-def Connect_To_Export_SQLSRV():
+def Connect_To_Customs_SQLSRV():
     server = "LCITDBSRV,1433"  # เซิร์ฟเวอร์
     database = "Customs_Interchange"  # ฐานข้อมูล
     user = "sa"  # ชื่อผู้ใช้
-    password = "J*n8k3FV2N"  # รหัสผ่าน
+    password = "p@ssw0rd"  # รหัสผ่าน
     
     try:
         # เชื่อมต่อฐานข้อมูล SQL Server โดยใช้ User และ Password
